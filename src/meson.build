@@ -1,6 +1,6 @@
-install_headers('game.h')
+install_headers('game.h', 'input.h')
 
-src = ['main.c', 'game.c']
+src = ['main.c', 'game.c', 'input.c']
 
 sdl2 = dependency('SDL2', version: '>=2.0')
 sdl2_image = dependency('SDL2_image', version: '>=2.0')

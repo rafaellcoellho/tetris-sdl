@@ -1,11 +1,11 @@
 #include <SDL2/SDL.h>
 #include "SDL2/SDL_image.h"
 #include "game.h"
+#include "input.h"
 
 static bool exit_game = false;
 static SDL_Renderer *renderer;
 static SDL_Window *window;
-static int keyboard[MAX_KEYBOARD_KEYS];
 
 static void init_sdl(void) 
 {
@@ -48,39 +48,6 @@ static void cap_frame_rate(long *then, float *remainder)
 	*then = SDL_GetTicks();
 }
 
-void do_key_up(SDL_KeyboardEvent *event)
-{
-	if (event->repeat == 0 && event->keysym.scancode < MAX_KEYBOARD_KEYS)
-		keyboard[event->keysym.scancode] = 0;
-}
-
-void do_key_down(SDL_KeyboardEvent *event)
-{
-	if (event->repeat == 0 && event->keysym.scancode < MAX_KEYBOARD_KEYS)
-		keyboard[event->keysym.scancode] = 1;
-}
-
-void do_input(void)
-{
-	SDL_Event event;
-	
-	while(SDL_PollEvent(&event)) {
-		switch(event.type) {
-			case SDL_QUIT:
-				exit_game = true;
-				break;
-			case SDL_KEYDOWN:
-				do_key_down(&event.key);
-				break;
-			case SDL_KEYUP:
-				do_key_up(&event.key);
-				break;
-			default:
-				break;
-		}
-	}
-}
-
 void Game_Create(void)
 {
     init_sdl();
@@ -97,7 +64,7 @@ void Game_Loop(void)
         SDL_SetRenderDrawColor(renderer, 32, 32, 32, 255);
         SDL_RenderClear(renderer);
 
-        do_input();
+        read_input(&exit_game);
 
         SDL_RenderPresent(renderer);
 
