@@ -35,7 +35,14 @@ void Board_Render(SDL_Renderer *renderer)
         for(unsigned int x = 0; x < BOARD_WIDTH; x++) {
             block.x += 1;
 
-            if (field[y*BOARD_WIDTH + x] == 0) SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            if (field[y*BOARD_WIDTH + x] == 0) SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);    // White
+            else if (field[y*BOARD_WIDTH + x] == 1) SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);   // Red
+            else if (field[y*BOARD_WIDTH + x] == 2) SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Yellow
+            else if (field[y*BOARD_WIDTH + x] == 3) SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); // Magenta
+            else if (field[y*BOARD_WIDTH + x] == 4) SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);   // Blue
+            else if (field[y*BOARD_WIDTH + x] == 5) SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255); // Cyan
+            else if (field[y*BOARD_WIDTH + x] == 6) SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);   // Green
+            else if (field[y*BOARD_WIDTH + x] == 7) SDL_SetRenderDrawColor(renderer, 255, 165, 0, 255); // Orange
             else if (field[y*BOARD_WIDTH + x] == 9) SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             
             SDL_RenderDrawRect(renderer, &block);

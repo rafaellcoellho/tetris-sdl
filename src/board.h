@@ -1,6 +1,8 @@
 #ifndef _BOARD_H
 #define _BOARD_H
 
+#include <SDL2/SDL.h>
+
 #define BOARD_WIDTH   12
 #define BOARD_HEIGHT  18
 
