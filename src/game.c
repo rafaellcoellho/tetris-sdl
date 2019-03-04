@@ -3,6 +3,7 @@
 #include "game.h"
 #include "input.h"
 #include "board.h"
+#include "tetromino.h"
 
 static bool exit_game = false;
 static SDL_Renderer *renderer;

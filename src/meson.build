@@ -1,6 +1,6 @@
-install_headers('game.h', 'input.h', 'board.h')
+install_headers('game.h', 'input.h', 'board.h', 'tetromino.h')
 
-src = ['main.c', 'game.c', 'input.c', 'board.c']
+src = ['main.c', 'game.c', 'input.c', 'board.c', 'tetromino.c']
 
 sdl2 = dependency('SDL2', version: '>=2.0')
 sdl2_image = dependency('SDL2_image', version: '>=2.0')
