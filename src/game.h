@@ -3,8 +3,8 @@
 
 #include <stdbool.h>
 
-#define SCREEN_WIDTH   350
-#define SCREEN_HEIGHT  500
+#define SCREEN_WIDTH   12 * 20
+#define SCREEN_HEIGHT  18 * 20
 
 void Game_Create(void);
 void Game_Loop(void);
