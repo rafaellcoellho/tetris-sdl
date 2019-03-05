@@ -2,6 +2,12 @@
 
 A tetris game made with SDL2. 
 
+<p align="center">
+	<a href="">
+		<img alt="Game" src="img01.png" width="200px">
+	</a>
+</p>
+
 ## Prerequisites
 
 Install [meson and ninja](https://mesonbuild.com/Getting-meson.html) to build the project.
@@ -39,4 +45,5 @@ $ ./src/main
 
 ## Reference 
 
-+ [parallelrealities shoot](https://www.parallelrealities.co.uk/tutorials/#shooter)
++ [parallelrealities shoot tutorial](https://www.parallelrealities.co.uk/tutorials/#shooter)
++ [javidx9 video](https://www.youtube.com/watch?v=8OK8_tHeCIA&t=695s)
