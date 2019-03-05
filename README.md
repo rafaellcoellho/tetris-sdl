@@ -39,7 +39,7 @@ $ ninja
 $ ./src/main
 ```
 
-## Authors
+## Author
 
 * **Rafael Coelho** - [rafaellcoellho](https://github.com/rafaellcoellho)
 
