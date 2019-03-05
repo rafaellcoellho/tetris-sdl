@@ -84,3 +84,16 @@ unsigned char *Tetromino_Draws(void)
     }
     return 0;
 }
+
+void Tetromuni_Lock(unsigned char *board, unsigned char *tetromino, int rotation, int n_pos_x, int n_pos_y)
+{
+    for(int py = 0; py < 4; py++) {
+        for(int px = 0; px < 4; px++) {
+            int index_piece = Tetromino_Rotate(px, py, rotation);
+            int index_board = (n_pos_y + py) * BOARD_WIDTH + (n_pos_x + px);
+            if(tetromino[index_piece] > 0) {
+                board[index_board] = tetromino[index_piece];
+            }
+        }
+    }
+}

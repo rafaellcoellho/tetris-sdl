@@ -6,5 +6,6 @@
 int Tetromino_Rotate(int px, int py, int r);
 bool Tetromino_Fit(unsigned char *board, unsigned char *tetromino, int rotation, int n_pos_x, int n_pos_y);
 unsigned char *Tetromino_Draws(void);
+void Tetromuni_Lock(unsigned char *board, unsigned char *tetromino, int rotation, int n_pos_x, int n_pos_y);
 
 #endif // _TETROMINO_H

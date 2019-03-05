@@ -113,7 +113,24 @@ static void force_down(void)
 		if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x, current_y+1)) current_y++;
 		else {
 
+			Tetromuni_Lock(p_board, current_tetromino, current_rotation, current_x, current_y);
 			
+			for(int py = 0; py < 4; py++) {
+				if(current_y + py < BOARD_HEIGHT - 1) {
+					bool line = true;
+					int index_board;
+					for(int px = 1; px < BOARD_WIDTH-1; px++) {
+						index_board = (current_y + py) * BOARD_WIDTH + px;
+						line &= (p_board[index_board]) != 0;
+					}
+					if(line) {
+						for(int px = 1; px < BOARD_WIDTH-1; px++) {
+							index_board = (current_y + py) * BOARD_WIDTH + px;
+							p_board[index_board] = 8;
+						}
+					}
+				}
+			}
 
 			current_x = BOARD_WIDTH / 2;
 			current_y = 0;
