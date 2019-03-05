@@ -44,7 +44,6 @@ void Board_Render(SDL_Renderer *renderer, unsigned char *current_tetromino, int 
             else if (field[y*BOARD_WIDTH + x] == 5) SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255); // Cyan
             else if (field[y*BOARD_WIDTH + x] == 6) SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);   // Green
             else if (field[y*BOARD_WIDTH + x] == 7) SDL_SetRenderDrawColor(renderer, 255, 165, 0, 255); // Orange
-            else if (field[y*BOARD_WIDTH + x] == 8) SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Orange
             else if (field[y*BOARD_WIDTH + x] == 9) SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);     // Black
             
             SDL_RenderDrawRect(renderer, &block);

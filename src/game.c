@@ -114,7 +114,7 @@ static void force_down(void)
 		else {
 
 			Tetromuni_Lock(p_board, current_tetromino, current_rotation, current_x, current_y);
-			
+
 			for(int py = 0; py < 4; py++) {
 				if(current_y + py < BOARD_HEIGHT - 1) {
 					bool line = true;
@@ -125,8 +125,9 @@ static void force_down(void)
 					}
 					if(line) {
 						for(int px = 1; px < BOARD_WIDTH-1; px++) {
-							index_board = (current_y + py) * BOARD_WIDTH + px;
-							p_board[index_board] = 8;
+							for(int aux = current_y+py; aux > 0; aux--) {
+								p_board[aux * BOARD_WIDTH + px] = p_board[(aux - 1) * BOARD_WIDTH + px];
+							}
 						}
 					}
 				}
