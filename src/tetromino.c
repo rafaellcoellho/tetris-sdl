@@ -1,40 +1,42 @@
+#include <time.h> 
+#include <stdlib.h>
 #include "tetromino.h"
 #include "board.h"
 
-unsigned char I[] = {0,0,1,0,
-                     0,0,1,0,
-                     0,0,1,0,
-                     0,0,1,0};
+static unsigned char I[] = {0,0,1,0,
+                            0,0,1,0,
+                            0,0,1,0,
+                            0,0,1,0};
 
-unsigned char J[] = {0,0,2,0,
-                     0,0,2,0,
-                     0,2,2,0,
-                     0,0,0,0};
+static unsigned char J[] = {0,0,2,0,
+                            0,0,2,0,
+                            0,2,2,0,
+                            0,0,0,0};
 
-unsigned char L[] = {0,0,3,0,
-                     0,0,3,0,
-                     0,0,3,3,
-                     0,0,0,0};
+static unsigned char L[] = {0,0,3,0,
+                            0,0,3,0,
+                            0,0,3,3,
+                            0,0,0,0};
 
-unsigned char O[] = {0,4,4,0,
-                     0,4,4,0,
-                     0,0,0,0,
-                     0,0,0,0};
+static unsigned char O[] = {0,4,4,0,
+                            0,4,4,0,
+                            0,0,0,0,
+                            0,0,0,0};
 
-unsigned char S[] = {0,0,5,5,
-                     0,5,5,0,
-                     0,0,0,0,
-                     0,0,0,0};
+static unsigned char S[] = {0,0,5,5,
+                            0,5,5,0,
+                            0,0,0,0,
+                            0,0,0,0};
 
-unsigned char T[] = {0,6,6,6,
-                     0,0,6,0,
-                     0,0,0,0,
-                     0,0,0,0};
+static unsigned char T[] = {0,6,6,6,
+                            0,0,6,0,
+                            0,0,0,0,
+                            0,0,0,0};
 
-unsigned char Z[] = {0,7,7,0,
-                     0,0,7,7,
-                     0,0,0,0,
-                     0,0,0,0};
+static unsigned char Z[] = {0,7,7,0,
+                            0,0,7,7,
+                            0,0,0,0,
+                            0,0,0,0};
 
 int Tetromino_Rotate(int px, int py, int rotation)
 {
@@ -63,4 +65,22 @@ bool Tetromino_Fit(unsigned char *board, unsigned char *tetromino, int rotation,
         }
     }
     return true;
+}
+
+unsigned char *Tetromino_Draws(void)
+{
+    time_t t;
+    srand((unsigned) time(&t));
+    int roulette = rand() % 7;
+
+    switch(roulette) {
+        case 0: return I;
+        case 1: return J;
+        case 2: return L;
+        case 3: return O;
+        case 4: return S;
+        case 5: return T;
+        case 6: return Z;
+    }
+    return 0;
 }

@@ -6,14 +6,18 @@
 #include "tetromino.h"
 
 static bool exit_game = false;
+static bool game_over = false;
 static SDL_Renderer *renderer;
 static SDL_Window *window;
 static unsigned char *p_board;
 
-unsigned char *current_tetromino = T;
+unsigned char *current_tetromino;
 int current_rotation = 0;
 int current_x = BOARD_WIDTH / 2;
 int current_y = 0;
+
+bool can_force_down = false;
+int game_speed = 20;
 
 static void init_sdl(void) 
 {
@@ -91,17 +95,41 @@ static void move_tetromino(void)
 		if (space_key()) {
 			if(!space_hold && Tetromino_Fit(p_board, current_tetromino, current_rotation+1, current_x, current_y)) current_rotation += 1;
 			space_hold = true;
-		} else {
-			space_hold = false;
-		}
+		} else space_hold = false;
+
 		filter = 5;
 	}
 	filter--;
 }
 
+static void force_down(void)
+{
+	static int speed_counter = 0;
+
+	speed_counter++;
+	can_force_down = (speed_counter == game_speed);
+
+	if(can_force_down) {
+		if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x, current_y+1)) current_y++;
+		else {
+
+			
+
+			current_x = BOARD_WIDTH / 2;
+			current_y = 0;
+			current_rotation = 0;
+			current_tetromino = Tetromino_Draws();
+
+			game_over = !Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x, current_y);
+		}
+		speed_counter = 0;
+	}
+}
+
 static void logic(void)
 {
 	move_tetromino();
+	force_down();
 }
 
 void Game_Create(void)
@@ -119,7 +147,8 @@ void Game_Loop(void)
 
     then = SDL_GetTicks();
 	remainder = 0;
-    while(exit_game == false){
+	current_tetromino = Tetromino_Draws();
+    while(exit_game == false && game_over == false){
 		prepare_scene();
 
         read_input(&exit_game);
