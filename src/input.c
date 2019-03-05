@@ -35,3 +35,28 @@ void read_input(bool *exit_game)
 		}
 	}
 }
+
+bool left_arrow_key(void) 
+{
+	return keyboard[SDL_SCANCODE_LEFT];
+}
+
+bool right_arrow_key(void) 
+{
+	return keyboard[SDL_SCANCODE_RIGHT];
+}
+
+bool down_arrow_key(void) 
+{
+	return keyboard[SDL_SCANCODE_DOWN];
+}
+
+bool space_key(void) 
+{
+	return keyboard[SDL_SCANCODE_SPACE];
+}
+
+bool esc_key(void)
+{
+	return keyboard[SDL_SCANCODE_ESCAPE];
+}

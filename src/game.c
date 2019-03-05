@@ -10,6 +10,11 @@ static SDL_Renderer *renderer;
 static SDL_Window *window;
 static unsigned char *p_board;
 
+unsigned char *current_tetromino = T;
+int current_rotation = 0;
+int current_x = BOARD_WIDTH / 2;
+int current_y = 0;
+
 static void init_sdl(void) 
 {
 	int rendererFlags, windowFlags;
@@ -65,9 +70,38 @@ static void present_scene(void)
     SDL_RenderPresent(renderer);
 }
 
-static void logic(void) 
+static void move_tetromino(void)
 {
+	static int filter = 5;
+	static bool space_hold = false;
 
+	if(filter == 0) {
+		if (left_arrow_key()) {
+			if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x-1, current_y)) current_x -= 1;
+		}
+
+		if (right_arrow_key()) {
+			if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x+1, current_y)) current_x += 1;
+		}
+
+		if (down_arrow_key()) {
+			if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x, current_y+1)) current_y += 1;
+		}
+
+		if (space_key()) {
+			if(!space_hold && Tetromino_Fit(p_board, current_tetromino, current_rotation+1, current_x, current_y)) current_rotation += 1;
+			space_hold = true;
+		} else {
+			space_hold = false;
+		}
+		filter = 5;
+	}
+	filter--;
+}
+
+static void logic(void)
+{
+	move_tetromino();
 }
 
 void Game_Create(void)
@@ -89,10 +123,11 @@ void Game_Loop(void)
 		prepare_scene();
 
         read_input(&exit_game);
+		if( esc_key() ) exit_game = true;
 
 		logic();
 
-		Board_Render(renderer);
+		Board_Render(renderer, current_tetromino, current_rotation, current_x, current_y);
 
 		present_scene();
 
