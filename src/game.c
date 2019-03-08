@@ -71,7 +71,7 @@ static void prepare_scene(void)
 
 static void present_scene(void)
 {
-    SDL_RenderPresent(renderer);
+	SDL_RenderPresent(renderer);
 }
 
 static void move_tetromino(void)
