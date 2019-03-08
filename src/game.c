@@ -22,25 +22,24 @@ int game_speed = 20;
 static void init_sdl(void) 
 {
 	int rendererFlags, windowFlags;
-
 	rendererFlags = SDL_RENDERER_ACCELERATED;
-	
 	windowFlags = 0;
 
-	SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Initializing SDL");
 	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf("Couldn't initialize SDL: %s\n", SDL_GetError());
 		exit(1);
 	}
 
-	SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Create Window");
-	window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+	window = SDL_CreateWindow("Tetris", 
+		SDL_WINDOWPOS_UNDEFINED, 
+		SDL_WINDOWPOS_UNDEFINED, 
+		SCREEN_WIDTH, 
+		SCREEN_HEIGHT, 
+		windowFlags
+	);
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-
-	SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Create Renderer");
 	renderer = SDL_CreateRenderer(window, -1, rendererFlags);
-
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 }
 
@@ -159,24 +158,24 @@ void Game_Create(void)
 void Game_Loop(void)
 {
     long then;
-	float remainder;
+    float remainder;
 
     then = SDL_GetTicks();
-	remainder = 0;
-	current_tetromino = Tetromino_Draws();
+    remainder = 0;
+    current_tetromino = Tetromino_Draws();
     while(exit_game == false && game_over == false){
-		prepare_scene();
+        prepare_scene();
 
-		read_input(&exit_game);
-		if( esc_key() ) exit_game = true;
+        read_input(&exit_game);
+        if( esc_key() ) exit_game = true;
 
-		logic();
+        logic();
 
-		Board_Render(renderer, current_tetromino, current_rotation, current_x, current_y);
+        Board_Render(renderer, current_tetromino, current_rotation, current_x, current_y);
 
-		present_scene();
+        present_scene();
 
-		cap_frame_rate(&then, &remainder);
+        cap_frame_rate(&then, &remainder);
     }
 }
 
