@@ -80,19 +80,25 @@ static void move_tetromino(void)
 
     if(filter == 0) {
         if (left_arrow_key()) {
-            if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x-1, current_y)) current_x -= 1;
+            if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x-1, current_y))
+                current_x -= 1;
         }
 
         if (right_arrow_key()) {
-            if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x+1, current_y)) current_x += 1;
+            if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x+1, current_y))
+                current_x += 1;
         }
 
         if (down_arrow_key()) {
-            if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x, current_y+1)) current_y += 1;
+            if(Tetromino_Fit(p_board, current_tetromino, current_rotation, current_x, current_y+1))
+                current_y += 1;
         }
 
         if (space_key()) {
-            if(!space_hold && Tetromino_Fit(p_board, current_tetromino, current_rotation+1, current_x, current_y)) current_rotation += 1;
+            if(!space_hold 
+                && Tetromino_Fit(p_board, current_tetromino, current_rotation+1, current_x, current_y)
+            ) 
+                current_rotation += 1;
             space_hold = true;
         } else space_hold = false;
 
