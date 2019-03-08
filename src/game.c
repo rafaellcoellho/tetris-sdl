@@ -181,8 +181,8 @@ void Game_Loop(void)
 
 void Game_Destroy(void)
 {
-	Board_Destroy();
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+    Board_Destroy();
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }
