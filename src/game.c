@@ -152,10 +152,8 @@ static void logic(void)
 
 void Game_Create(void)
 {
-    init_sdl();
-
+	init_sdl();
 	p_board = Board_Create();
-
 }
 
 void Game_Loop(void)
@@ -169,7 +167,7 @@ void Game_Loop(void)
     while(exit_game == false && game_over == false){
 		prepare_scene();
 
-        read_input(&exit_game);
+		read_input(&exit_game);
 		if( esc_key() ) exit_game = true;
 
 		logic();
@@ -178,14 +176,14 @@ void Game_Loop(void)
 
 		present_scene();
 
-        cap_frame_rate(&then, &remainder);
+		cap_frame_rate(&then, &remainder);
     }
 }
 
 void Game_Destroy(void)
 {
 	Board_Destroy();
-    SDL_DestroyRenderer(renderer);
+	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
